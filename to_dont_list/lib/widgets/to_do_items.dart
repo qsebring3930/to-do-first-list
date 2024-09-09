@@ -18,14 +18,14 @@ class ToDoListItem extends StatelessWidget {
   final ToDoListChangedCallback onListChanged;
   final ToDoListRemovedCallback onDeleteItem;
 
-  Color _getColor(BuildContext context) {
+  Color? _getColor(BuildContext context) {
     // The theme depends on the BuildContext because different
     // parts of the tree can have different themes.
     // The BuildContext indicates where the build is
     // taking place and therefore which theme to use.
 
     return completed //
-        ? Colors.black
+        ? Colors.black54
         : Theme.of(context).primaryColor;
   }
 
