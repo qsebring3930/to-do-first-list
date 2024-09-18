@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:to_dont_list/objects/item.dart';
 import 'package:to_dont_list/widgets/to_do_items.dart';
 import 'package:to_dont_list/widgets/to_do_dialog.dart';
+import 'package:to_dont_list/widgets/to_do_summary.dart';
 
 class ToDoList extends StatefulWidget {
   const ToDoList({super.key});
@@ -98,17 +99,28 @@ class _ToDoListState extends State<ToDoList> {
         appBar: AppBar(
           title: const Text('To Do List'),
         ),
-        body: ListView(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          children: items.map((item) {
-            return ToDoListItem(
-              item: item,
-              completed: _itemSet.contains(item),
-              onListChanged: _handleListChanged,
-              onDeleteItem: _handleDeleteItem,
-            );
-          }).toList(),
-        ),
+        body: Column(
+          children: [
+            ToDoSummary(
+            items: items,
+            itemSet: _itemSet,
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: items.length,
+              itemBuilder: (context, index) => Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: ToDoListItem(
+                  item: items[index],
+                  completed: _itemSet.contains(items[index]),
+                  onListChanged: _handleListChanged,
+                  onDeleteItem: _handleDeleteItem,
+                  tileSize: index == 0 ? 600.0 : 70.0
+                ),
+              ),
+            ),
+          ),
+        ]),
         floatingActionButton: FloatingActionButton(
             child: const Icon(Icons.add),
             onPressed: () {

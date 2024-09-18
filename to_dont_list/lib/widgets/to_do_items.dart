@@ -10,11 +10,13 @@ class ToDoListItem extends StatelessWidget {
       {required this.item,
       required this.completed,
       required this.onListChanged,
-      required this.onDeleteItem})
+      required this.onDeleteItem,
+      this.tileSize = 70.0})
       : super(key: ObjectKey(item));
 
   final Item item;
   final bool completed;
+  final double tileSize;
 
   final ToDoListChangedCallback onListChanged;
   final ToDoListRemovedCallback onDeleteItem;
@@ -44,19 +46,12 @@ class ToDoListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: tileSize,
       margin: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       decoration: BoxDecoration(
         color: item.color,
         borderRadius: BorderRadius.circular(10.0), // Rounded corners
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: const Offset(0, 3), // Shadow position
-          ),
-        ],
       ),
       child: ListTile(
         onTap: () {
@@ -68,8 +63,8 @@ class ToDoListItem extends StatelessWidget {
               }
             : null,
         leading: CircleAvatar(
-          backgroundColor: _getColor(context),
-          child: Text(item.abbrev()),
+            backgroundColor: _getColor(context),
+            child: Text(item.abbrev()),
         ),
         title: Text(
           item.name,
