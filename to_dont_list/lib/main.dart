@@ -1,4 +1,6 @@
 // Started with https://docs.flutter.dev/development/ui/widgets-intro
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:to_dont_list/objects/item.dart';
 import 'package:to_dont_list/widgets/to_do_items.dart';
@@ -12,8 +14,23 @@ class ToDoList extends StatefulWidget {
 }
 
 class _ToDoListState extends State<ToDoList> {
-  final List<Item> items = [const Item(name: "add more todos")];
+  final List<Item> items = [const Item(name: "add more todos", color: Colors.purpleAccent)];
   final _itemSet = <Item>{};
+
+  final List<Color> funColors = [
+    Colors.pinkAccent,
+    Colors.lightBlueAccent,
+    Colors.amberAccent,
+    Colors.greenAccent,
+    Colors.purpleAccent,
+    Colors.orangeAccent,
+    Colors.tealAccent,
+  ];
+
+  Color _getRandomColor() {
+    final random = Random();
+    return funColors[random.nextInt(funColors.length)];
+  }
 
   void _handleListChanged(Item item, bool completed) {
     setState(() {
@@ -46,7 +63,7 @@ class _ToDoListState extends State<ToDoList> {
   void _handleNewItem(String itemText, DateTime? dueDate, TextEditingController textController) {
     setState(() {
       print("Adding new item");
-      Item item = Item(name: itemText, dueDate: dueDate);
+      Item item = Item(name: itemText, dueDate: dueDate, color: _getRandomColor());
       items.insert(0, item);
       textController.clear();
     });

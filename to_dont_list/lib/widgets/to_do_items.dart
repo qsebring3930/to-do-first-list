@@ -39,28 +39,46 @@ class ToDoListItem extends StatelessWidget {
     );
   }
 
+  
+
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      onTap: () {
-        onListChanged(item, completed);
-      },
-      onLongPress: completed
-          ? () {
-              onDeleteItem(item);
-            }
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
+      padding: const EdgeInsets.all(8.0),
+      decoration: BoxDecoration(
+        color: item.color,
+        borderRadius: BorderRadius.circular(10.0), // Rounded corners
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: const Offset(0, 3), // Shadow position
+          ),
+        ],
+      ),
+      child: ListTile(
+        onTap: () {
+          onListChanged(item, completed);
+        },
+        onLongPress: completed
+            ? () {
+                onDeleteItem(item);
+              }
+            : null,
+        leading: CircleAvatar(
+          backgroundColor: _getColor(context),
+          child: Text(item.abbrev()),
+        ),
+        title: Text(
+          item.name,
+          style: _getTextStyle(context),
+        ),
+        subtitle: item.dueDate != null
+          ? Text(DateFormat('yyyy-MM-dd').format(item.dueDate!))
           : null,
-      leading: CircleAvatar(
-        backgroundColor: _getColor(context),
-        child: Text(item.abbrev()),
       ),
-      title: Text(
-        item.name,
-        style: _getTextStyle(context),
-      ),
-      subtitle: item.dueDate != null
-        ? Text(DateFormat('yyyy-MM-dd').format(item.dueDate!))
-        : null,
     );
   }
 }
