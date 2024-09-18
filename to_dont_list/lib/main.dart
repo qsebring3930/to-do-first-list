@@ -43,10 +43,10 @@ class _ToDoListState extends State<ToDoList> {
     });
   }
 
-  void _handleNewItem(String itemText, TextEditingController textController) {
+  void _handleNewItem(String itemText, DateTime? dueDate, TextEditingController textController) {
     setState(() {
       print("Adding new item");
-      Item item = Item(name: itemText);
+      Item item = Item(name: itemText, dueDate: dueDate);
       items.insert(0, item);
       textController.clear();
     });

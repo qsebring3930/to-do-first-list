@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:to_dont_list/objects/item.dart';
 
 typedef ToDoListChangedCallback = Function(Item item, bool completed);
@@ -57,6 +58,9 @@ class ToDoListItem extends StatelessWidget {
         item.name,
         style: _getTextStyle(context),
       ),
+      subtitle: item.dueDate != null
+        ? Text(DateFormat('yyyy-MM-dd').format(item.dueDate!))
+        : null,
     );
   }
 }
