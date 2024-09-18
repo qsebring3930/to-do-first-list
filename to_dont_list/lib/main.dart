@@ -32,6 +32,26 @@ class _ToDoListState extends State<ToDoList> {
     return funColors[random.nextInt(funColors.length)];
   }
 
+  void _sortItemsByDueDate() {
+    items.sort((a, b) {
+      if (_itemSet.contains(a) && !_itemSet.contains(b)) {
+        return 1;
+      } else if (!_itemSet.contains(a) && _itemSet.contains(b)) {
+        return -1;
+      } else {
+        if (a.dueDate == null && b.dueDate == null) {
+          return 0;
+        } else if (a.dueDate == null) {
+          return 1; // Items with no due date come last
+        } else if (b.dueDate == null) {
+          return -1; // Items with no due date come last
+        } else {
+          return a.dueDate!.compareTo(b.dueDate!);
+        }
+      }
+    });
+  }
+
   void _handleListChanged(Item item, bool completed) {
     setState(() {
       // When a user changes what's in the list, you need
@@ -50,6 +70,7 @@ class _ToDoListState extends State<ToDoList> {
         _itemSet.remove(item);
         items.insert(0, item);
       }
+      _sortItemsByDueDate();
     });
   }
 
@@ -57,6 +78,7 @@ class _ToDoListState extends State<ToDoList> {
     setState(() {
       print("Deleting item");
       items.remove(item);
+      _sortItemsByDueDate();
     });
   }
 
@@ -66,6 +88,7 @@ class _ToDoListState extends State<ToDoList> {
       Item item = Item(name: itemText, dueDate: dueDate, color: _getRandomColor());
       items.insert(0, item);
       textController.clear();
+      _sortItemsByDueDate();
     });
   }
 
