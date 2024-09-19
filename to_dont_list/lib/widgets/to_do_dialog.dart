@@ -51,6 +51,7 @@ class _ToDoDialogState extends State<ToDoDialog> {
         mainAxisSize: MainAxisSize.min,
         children: [
           TextField(
+          key: const Key("ItemName"),
           onChanged: (value) {
           setState(() {
             valueText = value;
@@ -60,6 +61,7 @@ class _ToDoDialogState extends State<ToDoDialog> {
         decoration: const InputDecoration(hintText: "type something here"),
       ),
       TextField(
+            key: const Key("ItemDate"),
             controller: _dateController,
             decoration: const InputDecoration(
               hintText: "Select due date",

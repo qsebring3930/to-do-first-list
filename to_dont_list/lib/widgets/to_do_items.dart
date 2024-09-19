@@ -11,7 +11,7 @@ class ToDoListItem extends StatelessWidget {
       required this.completed,
       required this.onListChanged,
       required this.onDeleteItem,
-      this.tileSize = 70.0})
+      required this.tileSize})
       : super(key: ObjectKey(item));
 
   final Item item;

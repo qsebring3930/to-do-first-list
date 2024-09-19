@@ -115,13 +115,14 @@ class _ToDoListState extends State<ToDoList> {
                   completed: _itemSet.contains(items[index]),
                   onListChanged: _handleListChanged,
                   onDeleteItem: _handleDeleteItem,
-                  tileSize: index == 0 ? 600.0 : 70.0
+                  tileSize: index == 0 ? 300.0 : 70.0,
                 ),
               ),
             ),
           ),
         ]),
         floatingActionButton: FloatingActionButton(
+            key: const Key("AddItem"),
             child: const Icon(Icons.add),
             onPressed: () {
               showDialog(

@@ -4,16 +4,16 @@ import 'package:to_dont_list/objects/item.dart';
 
 class ToDoSummary extends StatefulWidget {
   const ToDoSummary({
-    Key? key,
+    super.key,
     required this.items,
     required this.itemSet,
-  }) : super(key: key);
+  });
 
   final List<Item> items;
   final Set<Item> itemSet;
-
-  @override
-  _ToDoSummaryState createState() => _ToDoSummaryState();
+  
+@override
+  State<ToDoSummary> createState() => _ToDoSummaryState();
 }
 
 class _ToDoSummaryState extends State<ToDoSummary> {
