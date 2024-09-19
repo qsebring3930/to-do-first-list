@@ -115,7 +115,7 @@ class _ToDoListState extends State<ToDoList> {
                   completed: _itemSet.contains(items[index]),
                   onListChanged: _handleListChanged,
                   onDeleteItem: _handleDeleteItem,
-                  tileSize: index == 0 ? 300.0 : 70.0,
+                  tileSize: index == 0 ? 700.0 : 90.0,
                 ),
               ),
             ),
